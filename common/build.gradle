@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.realEstate'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.github.f4b6a3:ulid-creator:5.1.0'
+}
