@@ -1,4 +1,4 @@
-package com.realEstate.rdbms.common;
+package com.realEstate;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

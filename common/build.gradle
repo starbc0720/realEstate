@@ -3,7 +3,6 @@ plugins {
 }
 
 group = 'com.realEstate'
-version = 'unspecified'
 
 repositories {
     mavenCentral()

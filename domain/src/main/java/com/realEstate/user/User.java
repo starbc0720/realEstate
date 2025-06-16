@@ -1,6 +1,7 @@
-package com.realEstate.rdbms;
+package com.realEstate.user;
 
-import com.realEstate.rdbms.common.BaseEntity;
+import com.realEstate.BaseEntity;
+import com.realEstate.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,5 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String role;
+    private UserRole role;
 }

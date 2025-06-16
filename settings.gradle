@@ -1,4 +1,4 @@
 rootProject.name = 'realEstate'
-include 'storage'
+include 'domain'
 include 'common'
-
+include 'api'
