@@ -1,9 +1,9 @@
 services:
   db:
     image: mariadb:latest
-    container_name: mariadb_container
+    container_name: db
     ports:
-      - "3307:3307"
+      - "3307:3306"
     environment:
       TZ: Asia/Seoul
       MYSQL_ROOT_PASSWORD: 960720

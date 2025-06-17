@@ -1,3 +1,16 @@
-/gradlew text eol=lf
+# 기본 텍스트 파일은 자동 줄바꿈 처리
+* text=auto
+
+# Gradle Wrapper - 줄바꿈 LF + 실행권한
+gradlew text eol=lf
+
+# 셸 스크립트 - 유닉스 스타일 줄바꿈
+*.sh text eol=lf
+
+# Windows 배치 파일 - 윈도우 스타일 줄바꿈
 *.bat text eol=crlf
+
+# 바이너리 파일 - 줄바꿈 자동변환 금지
 *.jar binary
+*.png binary
+*.jpg binary

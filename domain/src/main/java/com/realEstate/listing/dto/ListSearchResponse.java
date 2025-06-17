@@ -5,7 +5,7 @@ import com.realEstate.listing.Listing;
 public record ListSearchResponse(
         String title,
 
-        String desc,
+        String description,
 
         Long price,
 
@@ -24,7 +24,7 @@ public record ListSearchResponse(
     public static ListSearchResponse fromEntity(Listing entity) {
         return new ListSearchResponse(
                 entity.getTitle(),
-                entity.getDesc(),
+                entity.getDescription(),
                 entity.getPrice(),
                 entity.getLoc(),
                 entity.getArea(),

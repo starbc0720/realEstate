@@ -18,7 +18,7 @@ public class Listing extends BaseEntity {
     private String title;
 
     @Column(columnDefinition = "TEXT")
-    private String desc;
+    private String description;
 
     private Long price;
 

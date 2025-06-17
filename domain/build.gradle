@@ -9,49 +9,57 @@ repositories {
 }
 
 dependencies {
-    //필요한 모듈 불러서 사용
+    // 공통 모듈 의존성 (다른 모듈 참조 시)
     implementation project(':common')
 
-    // mariadb
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-    // QueryDsl
+    // QueryDSL 관련 의존성
+    // QueryDSL JPA 모듈 (런타임 및 컴파일 시 필요)
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    implementation "com.querydsl:querydsl-core"
-    implementation "com.querydsl:querydsl-collections"
-    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
-    // Swagger
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
+    // QueryDSL APT (Annotation Processor Tool) - QClass 생성에 필수
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+
+    // Jakarta Persistence API (JPA) - QueryDSL Jakarta 버전에서 필요
+    // compileOnly: 컴파일 시에만 필요하고 최종 JAR에는 포함되지 않음 (런타임 환경에서 제공될 것으로 예상)
+    // annotationProcessor: QClass 생성을 위한 어노테이션 프로세싱 시 필요
+    compileOnly 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+    // Jakarta Annotations API - @Generated 등의 어노테이션을 위해 필요
+    compileOnly 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    // QueryDSL Core 및 Collections 모듈 (런타임 및 컴파일 시 필요)
+    implementation "com.querydsl:querydsl-core:5.0.0"
+    implementation "com.querydsl:querydsl-collections:5.0.0"
+
+    compileOnly 'org.springdoc:springdoc-openapi-starter-common:2.4.0'
 }
 
+// QClass 파일 생성 위치를 지정
 def generated = 'src/main/generated'
 
-//querydsl QClass 파일 생성 위치를 지정
-tasks.withType(JavaCompile) {
-    options.annotationProcessorGeneratedSourcesDirectory = file(generated)
-}
-
-///// java source set 에 querydsl QClass 위치 추가
+// Java 소스 세트에 QueryDSL QClass 위치 추가 (권장 방식)
 sourceSets {
     main {
         java {
-            srcDirs += [generated]
+            srcDirs += file(generated) // 생성된 QClass 파일을 소스 경로로 추가
         }
     }
 }
 
-///// gradle clean 시에 QClass 디렉토리 삭제
+// Gradle clean 태스크 시 QClass 디렉토리 삭제
 clean {
     delete file(generated)
 }
 
+// Jar 빌드 설정 (라이브러리 모듈에 적합)
 tasks.named('bootJar') {
-    enabled = false
+    enabled = false // 이 모듈은 실행 가능한 Spring Boot 애플리케이션 JAR을 만들지 않음
 }
 
 tasks.named('jar') {
-    enabled = true
+    enabled = true // 이 모듈은 일반 라이브러리 JAR을 생성
 }

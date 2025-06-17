@@ -1,5 +1,7 @@
 package com.realEstate.conditionAlert;
 
+import com.realEstate.BaseEntity;
+import com.realEstate.enums.BuildType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,7 +13,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class conditionAlert {
+public class conditionAlert extends BaseEntity {
 
     private String userId;
 
@@ -21,11 +23,11 @@ public class conditionAlert {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String type;
+    private BuildType type;
 
     private Float areaMin;
 
     @Builder.Default
-    @Column(nullable = false)
+    @Column(columnDefinition = "TINYINT(1) DEFAULT 0", nullable = false)
     private Boolean enabled = false;
 }

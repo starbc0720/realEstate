@@ -1,18 +1,20 @@
 package com.realEstate;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.boot.actuate.audit.listener.AuditListener;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+
 import java.sql.Timestamp;
 
 @MappedSuperclass
-@EntityListeners(AuditListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 @Getter
