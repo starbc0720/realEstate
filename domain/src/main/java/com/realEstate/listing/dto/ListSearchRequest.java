@@ -1,20 +1,33 @@
 package com.realEstate.listing.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record ListSearchRequest(
-        Long price,
+@Getter
+@Setter
+@NoArgsConstructor
+public class ListSearchRequest {
+    String title;
 
-        @Schema(description = "지역", requiredMode = Schema.RequiredMode.REQUIRED)
-        @NotEmpty(message = "지역 선택은 필수입니다")
-        String loc,
+    Long lowPrice;
 
-        Float area,
+    Long highPrice;
 
-        @Schema(description = "타입", requiredMode = Schema.RequiredMode.REQUIRED)
-        @NotEmpty(message = "타입 지정은 필수입니다")
-        String type,
+    @Schema(description = "위치", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "위치 입력은 필수입니다")
+    String loc;
 
-        Integer floor
-) { }
+    Float lowArea;
+
+    Float highArea;
+
+    String type;
+
+    Integer fromConstructionYear;
+
+    Integer toConstructionYear;
+}

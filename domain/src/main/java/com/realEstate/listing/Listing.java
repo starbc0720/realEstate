@@ -15,13 +15,16 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Listing extends BaseEntity {
 
+    @Column(nullable = false)
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
     private Long price;
 
+    @Column(nullable = false)
     private String loc;
 
     private Float area;
@@ -30,7 +33,7 @@ public class Listing extends BaseEntity {
     @Column(nullable = false)
     private BuildType type;
 
-    private Integer floor;
+    private Integer constructionYear;
 
     @Column(columnDefinition = "TEXT")
     private String summary;
@@ -38,7 +41,7 @@ public class Listing extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String embedding;
 
-    @Column(updatable = false)
+    @Column(updatable = false, nullable = false)
     private String createdBy;
 
     @Column

@@ -24,11 +24,12 @@ public class ListingRepositoryImpl implements ListingRepositoryCustom {
         return query
                 .selectFrom(listing)
                 .where(
-                        ListingQueryConditions.priceLte(req.price()),
-                        ListingQueryConditions.locContains(req.loc()),
-                        ListingQueryConditions.areaGte(req.area()),
-                        ListingQueryConditions.floorLte(req.floor()),
-                        ListingQueryConditions.typeEq(req.type())
+                        ListingQueryConditions.titleStartsWidth(req.getTitle()),
+                        ListingQueryConditions.priceBetween(req.getLowPrice(), req.getHighPrice()),
+                        ListingQueryConditions.locStartsWith(req.getLoc()),
+                        ListingQueryConditions.areaBetween(req.getLowArea(), req.getHighArea()),
+                        ListingQueryConditions.typeEq(req.getType()),
+                        ListingQueryConditions.constructionYearBetween(req.getFromConstructionYear(), req.getToConstructionYear())
                 )
                 .fetch();
     }

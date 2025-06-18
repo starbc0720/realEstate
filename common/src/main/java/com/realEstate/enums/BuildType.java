@@ -1,6 +1,7 @@
 package com.realEstate.enums;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Getter
+@RequiredArgsConstructor
 public enum BuildType {
     SALE("SALE", "판매"),
     RENT("RENT", "월세"),
@@ -15,11 +17,6 @@ public enum BuildType {
 
     private final String code;
     private final String label;
-
-    BuildType(String code, String label) {
-        this.code = code;
-        this.label = label;
-    }
 
     private static final Map<String, BuildType> LABEL_MAP = Arrays.stream(values())
             .collect(Collectors.toMap(
@@ -46,7 +43,7 @@ public enum BuildType {
         if(code == null) return null;
         BuildType type = CODE_MAP.get(code.toUpperCase());
         if(type == null){
-            throw new IllegalArgumentException("Invalid BuildType code : " + type);
+            throw new IllegalArgumentException("Invalid BuildType code : " + code);
         }
         return type;
     }

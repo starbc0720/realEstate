@@ -10,4 +10,8 @@ repositories {
 
 dependencies {
     implementation 'com.github.f4b6a3:ulid-creator:5.1.0'
+
+    //GlobalExceptionHandler 필요 라이브러리
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
 }
