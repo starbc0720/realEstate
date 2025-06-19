@@ -1,5 +1,6 @@
 package com.realEstate.enums;
 
+import com.realEstate.exception.CustomException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +35,7 @@ public enum BuildType {
         if(label == null) return null;
         BuildType type = LABEL_MAP.get(label);
         if(type == null){
-            throw new IllegalArgumentException("Invalid BuildType label: " + label);
+            throw new CustomException(ErrorCode.INVALID_BUILD_TYPE, "유효하지 않은 건물유형 명칭입니다");
         }
         return type;
     }
@@ -43,7 +44,7 @@ public enum BuildType {
         if(code == null) return null;
         BuildType type = CODE_MAP.get(code.toUpperCase());
         if(type == null){
-            throw new IllegalArgumentException("Invalid BuildType code : " + code);
+            throw new CustomException(ErrorCode.INVALID_BUILD_TYPE);
         }
         return type;
     }

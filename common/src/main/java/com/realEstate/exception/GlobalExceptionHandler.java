@@ -33,4 +33,11 @@ public class GlobalExceptionHandler {
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<ErrorResponse> handleCustomException(CustomException ex){
+        return ResponseEntity
+                .status(ex.getErrorCode().getStatus())
+                .body(ErrorResponse.of(ex.getErrorCode()));
+    }
 }
